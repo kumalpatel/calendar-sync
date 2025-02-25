@@ -4,63 +4,71 @@
 
 :root {
   /* Main backgrounds */
-  --background: theme(colors.gray.900);
-  --foreground: theme(colors.white);
-  
+  --background: theme(colors.slate.950);
+  --foreground: theme(colors.slate.50);
+
   /* Card and content */
-  --card: theme(colors.gray.800);
-  --card-foreground: theme(colors.white);
-  
+  --card: theme(colors.slate.900);
+  --card-secondary: theme(colors.slate.800);
+  --card-foreground: theme(colors.slate.100);
+
   /* Popover/dropdown */
-  --popover: theme(colors.gray.800);
-  --popover-foreground: theme(colors.white);
-  
+  --popover: theme(colors.slate.800);
+  --popover-foreground: theme(colors.slate.200);
+
   /* Primary action (Import button) */
-  --primary: theme(colors.yellow.500);
-  --primary-hover: theme(colors.yellow.600);
-  --primary-foreground: theme(colors.gray.900);
-  
+  --primary: theme(colors.indigo.500);
+  --primary-hover: theme(colors.indigo.600);
+  --primary-foreground: theme(colors.white);
+
   /* Secondary elements */
-  --secondary: theme(colors.gray.600);
-  --secondary-foreground: theme(colors.gray.300);
-  
+  --secondary: theme(colors.slate.700);
+  --secondary-foreground: theme(colors.slate.200);
+
+  /* Tertiary elements */
+  --tertiary: theme(colors.amber.500);
+  --tertiary-foreground: theme(colors.amber.200);
+
   /* Muted elements (form inputs) */
-  --muted: theme(colors.gray.700);
-  --muted-foreground: theme(colors.gray.300);
-  
+  --muted: theme(colors.slate.600);
+  --muted-secondary: theme(colors.indigo.300);
+  --muted-foreground: theme(colors.slate.400);
+
   /* Accent elements */
-  --accent: theme(colors.gray.600);
-  --accent-foreground: theme(colors.white);
-  
+  --accent: theme(colors.indigo.500);
+  --accent-secondary: theme(colors.sky.500);
+  --accent-foreground: theme(colors.indigo.100);
+
   /* Destructive elements */
-  --destructive: theme(colors.red.500);
-  --destructive-foreground: theme(colors.white);
-  
+  --destructive: theme(colors.rose.500);
+  --destructive-foreground: theme(colors.rose.100);
+
   /* Border elements */
-  --border: theme(colors.gray.600);
-  --emphasis: theme(colors.gray.700);
-  --subtle: theme(colors.gray.500);
-  
+  --border: theme(colors.slate.700);
+  --emphasis: theme(colors.indigo.400);
+  --subtle: theme(colors.slate.500);
+
   /* Form inputs */
-  --input: theme(colors.gray.700);
-  --input-foreground: theme(colors.white);
+  --input: theme(colors.slate.800);
+  --input-foreground: theme(colors.slate.200);
 
   /* Focus ring */
-  --ring: theme(colors.gray.500);
+  --ring: theme(colors.indigo.500);
 
   /* Success actions */
-  --success: theme(colors.green.500);
-  --success-hover: theme(colors.green.600);
-  --success-foreground: theme(colors.white);
+  --success: theme(colors.emerald.400);
+  --success-hover: theme(colors.emerald.500);
+  --success-foreground: theme(colors.emerald.100);
 
   /* Border radius */
-  --radius: 0.5rem;
+  --radius: 0.75rem;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
+  --color-card-secondary: var(--card-secondary);
   --color-card-foreground: var(--card-foreground);
   --color-popover: var(--popover);
   --color-popover-foreground: var(--popover-foreground);
@@ -69,9 +77,13 @@
   --color-primary-foreground: var(--primary-foreground);
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
+  --color-tertiary: var(--tertiary);
+  --color-tertiary-foreground: var(--tertiary-foreground);
   --color-muted: var(--muted);
+  --color-muted-secondary: var(--muted-secondary);
   --color-muted-foreground: var(--muted-foreground);
   --color-accent: var(--accent);
+  --color-accent-secondary: var(--accent-secondary);
   --color-accent-foreground: var(--accent-foreground);
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
@@ -88,6 +100,39 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+}
+
+@layer components {
+  /* Gradient styles */
+  .gradient-primary {
+    @apply bg-gradient-to-r from-primary via-accent to-accent-secondary;
+  }
+  .gradient-secondary {
+    @apply bg-gradient-to-r from-accent-secondary via-accent to-primary;
+  }
+  .gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent-secondary;
+  }
+  .gradient-card {
+    @apply bg-gradient-to-r from-card to-card-secondary/60;
+  }
+
+  /* Animation effects */
+  .shine-effect {
+    @apply absolute inset-0 opacity-0 group-hover:opacity-100 duration-1000 
+           bg-gradient-to-r from-transparent via-foreground/20 to-transparent 
+           -translate-x-full group-hover:translate-x-full transition-all;
+  }
+  .glow-effect {
+    @apply absolute inset-0 rounded-xl border border-emphasis/10 
+    group-hover:border-emphasis/30 group-hover:shadow-[0_0_20px_rgba(99,102,241,0.4)] 
+    transition-all duration-500;
+  }
+
+  /* Glass morphism effect */
+  .glass-card {
+    @apply backdrop-blur-xl border border-foreground/10 shadow-xl;
+  }
 }
 
 @layer base {
